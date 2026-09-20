@@ -60,6 +60,7 @@ python scripts/agent2_lda.py             # ② LDA 主题挖掘
 python scripts/agent3_planner.py         # ③ 策划师（需 DEEPSEEK_API_KEY）
 python scripts/agent4_qa.py              # ④ 质检
 python scripts/agent3_revise.py          # ③b 修正（产出 v2）
+python scripts/agent3_campaign.py        # ③c 执行方案（需 DEEPSEEK_API_KEY）
 ```
 
 ## 六、核心结果（硬指标，全部来自真实数据）

@@ -18,6 +18,7 @@ STEPS = [
     ("③ 策划师", "scripts/agent3_planner.py", True),
     ("④ 质检", "scripts/agent4_qa.py", True),
     ("③b 修正", "scripts/agent3_revise.py", True),
+    ("③c 执行方案", "scripts/agent3_campaign.py", True),
 ]
 
 
