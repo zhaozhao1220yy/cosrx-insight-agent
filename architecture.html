@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>COSRX 消费者洞察 → 营销策划 Agent · 架构图</title>
+<style>
+  :root {
+    color-scheme: light;
+    --brand-50: #e8f0fe; --brand-100: #d2e3fc; --brand-300: #8ab4f8; --brand-600: #1a73e8; --brand-700: #0b57d0;
+    --gray-50: #f9fafb; --gray-100: #f3f4f6; --gray-200: #e5e7eb; --gray-300: #d1d5db;
+    --gray-500: #6b7280; --gray-600: #4b5563; --gray-900: #111827;
+    --bg: #ffffff; --surface: #ffffff; --border: var(--gray-200); --control-border: var(--gray-300);
+    --fg: var(--gray-900); --fg-muted: var(--gray-600); --fg-faint: var(--gray-500);
+    --radius-card: 12px; --ease: cubic-bezier(0.2, 0.7, 0.3, 1);
+  }
+  .dark {
+    color-scheme: dark;
+    --bg: #000000; --surface: #0d0d0d; --border: #1f1f1f; --control-border: #303030;
+    --fg: #f3f4f6; --fg-muted: #9ca3af; --fg-faint: #6b7280;
+    --brand-600: #8ab4f8; --brand-700: #8ab4f8;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--fg);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif;
+    -webkit-font-smoothing: antialiased; font-size: 14px; line-height: 1.5;
+  }
+  header {
+    border-bottom: 1px solid var(--border); padding: 40px 16px 32px;
+  }
+  .wrap { max-width: 46rem; margin: 0 auto; padding: 0 16px; }
+  .eyebrow {
+    font-size: 12px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--brand-700); margin: 0 0 8px;
+  }
+  h1 { font-size: 28px; font-weight: 600; letter-spacing: -0.025em; margin: 0 0 8px; }
+  .sub { color: var(--fg-muted); margin: 0; }
+  main { padding: 32px 0 64px; }
+  .flow { position: relative; }
+  .node {
+    border: 1px solid var(--border); border-radius: var(--radius-card); background: var(--surface);
+    padding: 20px 24px; margin-bottom: 0; position: relative;
+  }
+  .node .num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px; border-radius: 9999px; background: var(--brand-50); color: var(--brand-700);
+    font-weight: 600; font-size: 13px; margin-right: 8px; flex: none;
+  }
+  .dark .node .num { background: #0d0d0d; color: var(--brand-600); border: 1px solid #1f1f1f; }
+  .node h2 { font-size: 16px; font-weight: 600; margin: 0; display: inline-flex; align-items: center; }
+  .node .role { color: var(--brand-700); font-weight: 600; margin-left: 8px; font-size: 13px; }
+  .node p { margin: 8px 0 0; color: var(--fg-muted); }
+  .node .out { margin: 10px 0 0; font-size: 13px; color: var(--fg-faint); }
+  .node .out code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 12px;
+    background: var(--gray-50); border: 1px solid var(--border); border-radius: 6px; padding: 1px 6px; color: var(--fg-muted);
+  }
+  .dark .node .out code { background: #0d0d0d; }
+  .arrow { text-align: center; padding: 6px 0; color: var(--fg-faint); line-height: 1; }
+  .arrow svg { display: inline-block; }
+  .input-line {
+    border: 1px dashed var(--control-border); border-radius: var(--radius-card); padding: 14px 20px;
+    color: var(--fg-muted); margin-bottom: 0; text-align: center;
+  }
+  .input-line strong { color: var(--fg); font-weight: 600; }
+  .legend { margin-top: 32px; border: 1px solid var(--border); border-radius: var(--radius-card); padding: 20px 24px; }
+  .legend h3 { font-size: 14px; font-weight: 600; margin: 0 0 12px; }
+  .legend ul { margin: 0; padding-left: 18px; color: var(--fg-muted); }
+  .legend li { margin: 4px 0; }
+  .qa-badge {
+    display: inline-block; border-radius: 9999px; border: 1px solid var(--border); padding: 2px 8px;
+    font-size: 12px; color: var(--fg-muted); margin-left: 8px; font-weight: 500;
+  }
+  footer { border-top: 1px solid var(--border); padding: 24px 0; color: var(--fg-faint); font-size: 12px; }
+  a { color: var(--brand-700); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  @media (max-width: 640px) { h1 { font-size: 24px; } .node { padding: 16px 18px; } }
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <p class="eyebrow">Agent Architecture</p>
+    <h1>COSRX 消费者洞察 → 营销策划 Agent</h1>
+    <p class="sub">从真实商品评论到可落地营销策划案，5 个环节自动衔接，质检兜底，每个结论可追溯。</p>
+  </div>
+</header>
+<main>
+  <div class="wrap">
+    <section class="flow">
+      <div class="input-line">输入：<strong>真实评论 8,321 条</strong>（Kaggle 公开数据集 · Sociolla 印尼电商 · COSRX）</div>
+
+      <div class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="node">
+        <h2><span class="num">1</span>数据工 <span class="role">Data Cleaner</span></h2>
+        <p>读原始评论，去重、去噪、规范化，输出干净数据和质量报告。</p>
+        <p class="out">产出 <code>reviews_clean.csv</code> · <code>data_quality_report.json</code></p>
+      </div>
+
+      <div class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="node">
+        <h2><span class="num">2</span>分析师 <span class="role">Analyst</span></h2>
+        <p>满意度、忠诚度、人群画像、痛点挖掘，再加 LDA 主题模型发现讨论焦点。</p>
+        <p class="out">产出 <code>insights.json</code> · <code>lda_topics.json</code></p>
+      </div>
+
+      <div class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="node">
+        <h2><span class="num">3</span>策划师 <span class="role">Planner</span></h2>
+        <p>把洞察翻译成营销策划案（调用大模型），产出人群定位、内容选题、活动策划、关键话术。</p>
+        <p class="out">产出 <code>marketing_plan.md</code></p>
+      </div>
+
+      <div class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="node">
+        <h2><span class="num">4</span>质检 <span class="role">QA</span><span class="qa-badge">抓出 8 处过度推断</span></h2>
+        <p>逐条核查策划案的每个数字能否追溯到原始数据，拦截 AI 的过度推断和幻觉。</p>
+        <p class="out">产出 <code>qa_report.md</code></p>
+      </div>
+
+      <div class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="node">
+        <h2><span class="num">3b</span>修正 <span class="role">Revise</span></h2>
+        <p>根据质检报告收敛过度推断、修正口径，产出严谨版策划案。</p>
+        <p class="out">产出 <code>marketing_plan_v2.md</code></p>
+      </div>
+
+      <div class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2v11M3 9l5 5 5-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+
+      <div class="input-line">输出：<strong>消费者洞察报告 + 严谨版营销策划案</strong>（每个数字可追溯到原始评论）</div>
+    </section>
+
+    <section class="legend">
+      <h3>为什么这样设计</h3>
+      <ul>
+        <li>每个 Agent 只做一件事，互相独立，出问题能定位到具体环节。</li>
+        <li>质检单独成环，AI 生成的结论先过一遍事实核查，再交给人工判断。</li>
+        <li>人只保留 AI 替代不了的营销判断，重复劳动交给流水线。</li>
+      </ul>
+    </section>
+  </div>
+</main>
+<footer>
+  <div class="wrap">项目作者 马路尧（Luyao Ma） · <a href="./README.md">README</a> · <a href="./RESULTS.md">结果报告</a></div>
+</footer>
+<script>
+  var m = window.matchMedia('(prefers-color-scheme: dark)');
+  function apply(e) { document.documentElement.classList.toggle('dark', e.matches); }
+  apply(m); m.addEventListener('change', apply);
+</script>
+</body>
+</html>

@@ -1,0 +1,31 @@
+{
+  "原始评论条数": 8321,
+  "去重删除条数": 5,
+  "空文本删除条数": 0,
+  "清洗后条数": 8316,
+  "覆盖产品数": 2,
+  "各字段缺失率": {
+    "user_name": 0.0006,
+    "is_expert_reviewer": 0.5554,
+    "user_level": 0.0,
+    "user_id": 0.0,
+    "skin_types": 0.1104,
+    "age_range": 0.2522,
+    "is_repurchase": 0.0,
+    "is_recommended": 0.0,
+    "star_effectiveness": 0.0049,
+    "star_packaging": 0.0,
+    "star_texture": 0.0049,
+    "star_value_for_money": 0.0,
+    "source": 0.1486,
+    "created_at": 0.0,
+    "total_likes": 0.0,
+    "is_verified_purchase": 0.0,
+    "details": 0.0,
+    "duration_of_used": 0.3847,
+    "product_id": 0.0,
+    "product_name": 0.0,
+    "product_size": 0.3302,
+    "_source_file": 0.0
+  }
+}

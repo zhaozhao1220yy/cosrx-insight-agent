@@ -1,0 +1,191 @@
+{
+  "产品": [
+    "Aloe Soothing Sun Cream SPF 50+ PA+++",
+    "Advanced Snail 92 All in One Cream"
+  ],
+  "评论总数": 8316,
+  "正面评论(效果>=4星)": 7860,
+  "负面评论(效果<=2星)": 103,
+  "满意度_4维度均分_1到5": {
+    "star_effectiveness": 4.67,
+    "star_packaging": 4.63,
+    "star_texture": 4.62,
+    "star_value_for_money": 4.42
+  },
+  "推荐率_百分比": 95.3,
+  "复购意愿率_百分比": 76.3,
+  "年龄分布": {
+    "25 - 29 th": 2170,
+    "19 - 24 th": 2076,
+    "30 - 34 th": 911,
+    "< 18 th": 531,
+    "35 - 39 th": 316,
+    "> 40 th": 215
+  },
+  "肤质Top10": [
+    [
+      "Komedo",
+      4122
+    ],
+    [
+      "Kulit Kombinasi",
+      3942
+    ],
+    [
+      "Pori Besar",
+      3699
+    ],
+    [
+      "Kulit Kusam",
+      3459
+    ],
+    [
+      "Jerawat",
+      3440
+    ],
+    [
+      "Kulit Sensitif",
+      2477
+    ],
+    [
+      "Dark Circle",
+      2420
+    ],
+    [
+      "Kantung Mata",
+      2237
+    ],
+    [
+      "Kulit Berminyak",
+      2184
+    ],
+    [
+      "Flek",
+      1925
+    ]
+  ],
+  "好评关键词Top15": [
+    [
+      "bikin",
+      3500
+    ],
+    [
+      "sunscreen",
+      3002
+    ],
+    [
+      "muka",
+      2215
+    ],
+    [
+      "buat",
+      2201
+    ],
+    [
+      "sama",
+      2063
+    ],
+    [
+      "suka",
+      1811
+    ],
+    [
+      "teksturnya",
+      1606
+    ],
+    [
+      "cosrx",
+      1561
+    ],
+    [
+      "agak",
+      1487
+    ],
+    [
+      "lengket",
+      1420
+    ],
+    [
+      "enak",
+      1331
+    ],
+    [
+      "gitu",
+      1274
+    ],
+    [
+      "berminyak",
+      1258
+    ],
+    [
+      "lagi",
+      1214
+    ],
+    [
+      "bisa",
+      1174
+    ]
+  ],
+  "差评关键词Top15": [
+    [
+      "bikin",
+      39
+    ],
+    [
+      "buat",
+      31
+    ],
+    [
+      "sama",
+      29
+    ],
+    [
+      "setelah",
+      26
+    ],
+    [
+      "muka",
+      23
+    ],
+    [
+      "berminyak",
+      23
+    ],
+    [
+      "banyak",
+      22
+    ],
+    [
+      "padahal",
+      21
+    ],
+    [
+      "cosrx",
+      21
+    ],
+    [
+      "beli",
+      21
+    ],
+    [
+      "sunscreen",
+      21
+    ],
+    [
+      "kulitku",
+      21
+    ],
+    [
+      "enak",
+      20
+    ],
+    [
+      "malah",
+      20
+    ],
+    [
+      "jerawat",
+      20
+    ]
+  ]
+}
